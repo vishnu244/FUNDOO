@@ -7,6 +7,8 @@ use App\Http\Controllers\CreateController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NotesController;
 use App\Http\Controllers\LableController;
+use App\Http\Controllers\CacheController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -69,7 +71,13 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::Delete('deletedata_by_ID/{id}',[CreateController::class,'delete_by_id']);
 });
 
+Route::post('reset',[CreateController::class,'reset']);
 Route::post('forgotPassword',[CreateController::class,'forgotPassword']);
+Route::post('resetPassword',[CreateController::class,'resetPassword']);
 
 
+Route::get('getUser',[CacheController::class, 'getUser']);
+Route::get('getNotes',[CacheController::class, 'getNotes']);
+Route::get('getLable',[CacheController::class, 'getLable']);
+Route::get('getJoinNotesLable',[CacheController::class, 'getJoinNotesLable']);
 
