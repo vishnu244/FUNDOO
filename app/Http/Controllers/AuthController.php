@@ -49,7 +49,7 @@ class AuthController extends Controller
 
         if(!$user || !Hash::check($data['password'], $user->password))
         {
-            Log::channel('custom')->error("Invalid Credentials");
+            Log::channel('custom')->error("Invalid Credentials to Login");
             return response(['message' => 'Invalid Credentials'], 401);
         }
         else
