@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use Illuminate\support\Facades\DB;
+use Illuminate\support\Facades\Log;
+
 use Illuminate\Http\Request;
 use App\Models\lable;
 use App\Models\notes;
@@ -32,8 +34,12 @@ class LableController extends Controller
     // -----------API Function to display Lable-------------------
     public function display_CreateLable()
     {
+        //log::info('Lable Displayed successfully');
+
         $lable = lable::all();
         return response()->json(['success' => $lable]);
+
+
 
     }
 
@@ -67,6 +73,8 @@ class LableController extends Controller
         }
         else
         {
+            Log::channel('custom')->info("Lable Displayed successfully");
+
             return response()->json(['message'=>'No Lable Found with that ID'],404);
         }
       

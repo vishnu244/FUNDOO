@@ -18,8 +18,8 @@ Route::get('/', function () {
 });
 
 ///------
-Route::get('/log', function () {
-    \Log::info('This is my 1st log');
-    dd('Done');
+
+Route::get('displayLable', function () {
+    return view('welcome');
 });
 ///---------

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+
 use App\Models\User;
 
 class AuthController extends Controller
@@ -28,7 +30,7 @@ class AuthController extends Controller
             'user'=>$user,
             'token'=>$token,
         ];
-
+        Log::channel('custom')->info("Data Registered");
         return response($response,201);
 
     }
@@ -47,6 +49,7 @@ class AuthController extends Controller
 
         if(!$user || !Hash::check($data['password'], $user->password))
         {
+            Log::channel('custom')->error("Invalid Credentials");
             return response(['message' => 'Invalid Credentials'], 401);
         }
         else
@@ -56,7 +59,7 @@ class AuthController extends Controller
                 'user' => $user,
                 'token' => $token,
             ];
-
+            Log::channel('custom')->info("Login succesfull");
             return response($response, 200);
         }
     }
@@ -67,6 +70,7 @@ class AuthController extends Controller
     {
         auth()->user()->tokens()->delete();
         return response(['message'=>'Logged Out Successfully']);
+
     }
 
 }

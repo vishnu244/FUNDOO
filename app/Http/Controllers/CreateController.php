@@ -5,8 +5,18 @@ use Illuminate\support\Facades\Hash;
 use Illuminate\support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\create;
+use App\Models\User;
+use App\Mail\sendmail;
+//-----
+use Illuminate\Support\Facades\Password;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Mail\Message;
+use Illuminate\Support\Facades\Log;
+
+
 use Illuminate\Support\Str;
-use App\Models\PasswordReset as ModelsPasswordReset;
+//use App\Models\PasswordReset as ModelsPasswordReset;
 use App\Models\PasswordReset;
 
 use App\Notifications\PasswordResetRequest;
@@ -24,10 +34,7 @@ class CreateController extends Controller
             'Password'=>'required | max:200',
             'MobileNumber'=>'required | max:12',
             'Address'=>'required | max:200',
-
         ]);
-
-
         $create = new create;
         $create->UserName = $request->UserName;
         $create->Email = $request->Email;
@@ -39,14 +46,24 @@ class CreateController extends Controller
         $create->Address = $request->Address;
 
         $create ->save();
+        Log::channel('custom')->info("Data Added Successfully");
         return response()->json(['message'=>'Data Added Successfully'],200);
+
     }
 
     //Function to Retreive Data Based on ID 
     public function display_by_id($id)
     {
         $create = create::find($id);
-        return response()->json(['success' => $create]);
+        if($create)
+        {
+            return response()->json(['success' => $create]);
+        }
+        else{
+            Log::channel('custom')->error(" No Data found with that ID");
+            return response()->json(['Message' => "No data Found with That ID"]);
+        }
+
     }
     //Function to Retreive Data 
     public function display()
@@ -66,10 +83,7 @@ class CreateController extends Controller
             'Password'=>'required | max:200',
             'MobileNumber'=>'required | max:12',
             'Address'=>'required | max:200',
-
         ]);
-
-
         $create = create::find($id);
         if($create)
         {
@@ -84,10 +98,10 @@ class CreateController extends Controller
 
             $create ->update();
             return response()->json(['message'=>'Data Updated Successfully'],200);
-
         }
         else
         {
+            Log::channel('custom')->error("No Data Found with that ID");
             return response()->json(['message'=>'No Data Found with that ID'],404);
         }
     }
@@ -107,19 +121,18 @@ class CreateController extends Controller
         }
         else
         {
+            Log::channel('custom')->error("No Data Found with that ID");
             return response()->json(['message'=>'No Data Found with that ID'],404);
         }
     }
-//----------------------------------------------------------------------
+//****************************************************************** */
 
 
+//changing password in postman
 
 
-
-
-    public function reset(Request $request){
+    public function changePassword(Request $request){
         $request->validate([
-            'userId' => 'required',
             'email' => 'required',
             'password' =>'required',
             'newPassword' => 'required'
@@ -131,29 +144,30 @@ class CreateController extends Controller
             
         }
         else{
-            Log::channel('custom')->error("Check your old password");
+            Log::channel('custom')->error("You have Entered the wrong password");
             return response()->json(['message'=>"Check your old password", 'status'=>400]);
         }
     }
 
 
-
+//--- sending token to mail to change password ------- 
 public function forgotPassword(Request $request)
     {  
         
          $request->validate([
-            'Email'=>'required | max:200',         
+            'email'=>'required | max:200',         
         ]);
 
-        $Email = $request->Email;
+        $email = $request->email;
 
         //validate email
         //$validator = Validator::make($Email, [
           //  'Email' => 'required|Email'
         //]);
 
-        $create = create::where('Email', $Email)->first();
-        if (!$create) {
+        $user = User::where('email', $email)->first();
+        if (!$user) {
+            Log::channel('custom')->error("Email does not exists");
             return response()->json(['Message' => "Email does not exists", 'status' => 404]);
             
         } 
@@ -162,32 +176,31 @@ public function forgotPassword(Request $request)
 
             //$token = Auth::fromcreate($create);
             $token = Str::random(10);
-            $reset = new ModelsPasswordReset();
+            $reset = new PasswordReset();
+
+            PasswordReset::create([
+                'email' => $request->email,
+                'token' => $token
+            ]);
     
-            $reset->Email = $request->input('Email');
-            $reset->token = $request->input('token');
+            //$reset->email = $request->input('email');
+            //$reset->token = $request->input('token');
     
-            Mail::to($Email)->send(new SendMail($token, $Email));
-            return $this->successResponse();
-            /*
-            if ($create) {
-                $delay = now()->addSeconds(120);
-                $create->notify((new PasswordResetRequest($create->Email, $token))->delay($delay));
-                Log::info('Reset Password Token Sent to your Email');
-                return response()->json([
-                    'message' => 'Reset Password Token Sent to your Email',
-                    'delay' => $delay,
-                ], 201);
-            }*/
+            Mail::to($email)->send(new SendMail($token, $email));
+            return "mail sent";
+            
         }
+        
      
     }
 
     //-------------------
-    public function resetPassword(Request $request, $token)
+    public function resetPassword(Request $request)
     {
         $request->validate([
-            'password' => 'require'
+            'email' => 'required',
+            'password' => 'required',
+            'token' => 'required'
         ]);
 
        // $validator = Validator::make($request->all(), [
@@ -196,30 +209,21 @@ public function forgotPassword(Request $request)
         //]);
 
 
-        $passwordReset = PasswordReset::where('token', $token)->first();
+        $passwordReset = PasswordReset::where('token', $request->token)->first();
         if(!$passwordReset){
+            Log::channel('custom')->error("You have entered invalid token");
             return response()->json(['message' => "Token is invalid "]);
         }
 
         $user = User::where('email', $passwordReset->email)->first();
         $user->password = Hash::make($request->password);
 
-        PasswordReset::where('email', $user->email)->delete();
+        PasswordReset::where('email', $request->email)->delete();
         return "Password changed";
 
-        /*
-            $currentUser = JWTAuth::authenticate($request->token);
-        {
-            if (!$currentUser) {
-                log::warning('Invalid Authorisation Token ');
-                throw new FundoNotesException('Invalid Authorization Token', 401);
-            } else {
-                $user = User::updatePassword($currentUser, $request->new_password);
-                log::info('Password updated successfully');
-                return response()->json([
-                    'message' => 'Password Reset Successful'
-                ], 201);
-            }
-        } */
+       
     }
+    //**************************************************************** */
+
+
 }
