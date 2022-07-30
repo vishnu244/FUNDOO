@@ -30,7 +30,7 @@ class AuthController extends Controller
             'user'=>$user,
             'token'=>$token,
         ];
-        Log::channel('custom')->info("Data Registered");
+        Log::channel('custom')->info("Data Registered succesfully");
         return response($response,201);
 
     }
@@ -49,7 +49,7 @@ class AuthController extends Controller
 
         if(!$user || !Hash::check($data['password'], $user->password))
         {
-            Log::channel('custom')->error("Invalid Credentials to Login");
+            Log::channel('custom')->error("Invalid Credentials to Logins");
             return response(['message' => 'Invalid Credentials'], 401);
         }
         else
