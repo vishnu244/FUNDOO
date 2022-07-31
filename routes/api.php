@@ -73,7 +73,6 @@ Route::POST('login',[AuthController::class,'login']);
 Route::post('reset',[CreateController::class,'changePassword']);
 Route::post('forgotPassword',[CreateController::class,'forgotPassword']);
 Route::post('resetPassword',[CreateController::class,'resetPassword']);
-//Route::post('sendmail',[CreateController::class,'resetPassword']);
 
 
 Route::get('getUser',[CacheController::class, 'getUser']);

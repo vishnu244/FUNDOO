@@ -25,7 +25,6 @@ class notesController extends Controller
             'message' => 'notes created successfully',
             'notes' => $notes
         ], 200);
-
     }
 
 
@@ -41,7 +40,15 @@ class notesController extends Controller
     public function display_createdNotes_ID($id)
     {
         $notes = notes::find($id);
-        return response()->json(['success' => $notes]);
+        if($notes)
+        {
+            return response()->json(['success' => $notes]);
+        }
+        else
+        {
+            Log::channel('custom')->info("No Notes Found with that ID");
+            return response()->json(['Message' => "No Notes found with that ID"]);
+        }
     }
 
 
@@ -67,7 +74,8 @@ class notesController extends Controller
         }
         else
         {
-            return response()->json(['message'=>'No Data Found with that ID'],404);
+            Log::channel('custom')->info("No Notes Found with that ID");
+            return response()->json(['message'=>'No Notes Found with that ID'],404);
         }
       
     }
@@ -85,6 +93,7 @@ class notesController extends Controller
         }
         else
         {
+            Log::channel('custom')->info("No Notes Found with that ID");
             return response()->json(['message'=>'No Data Found with that ID'],404);
         }
     }
