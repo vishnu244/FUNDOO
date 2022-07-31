@@ -36,7 +36,8 @@ class cacheController extends Controller
 
     public function getJoinNotesLable()
     {
-        $lable = Cache::remember('lable',10, function(){
+        $lable = Cache::remember('lable',10, function()
+        {
             return DB::table('notes')->join('lables', 'notes.id','=','lables.lable_id')->select('notes.*','lables.lable')->get();
         });
         return $lable;

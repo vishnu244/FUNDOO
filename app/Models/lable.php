@@ -11,8 +11,7 @@ class lable extends Model
     protected $table = 'lables';
     protected $fillable = [
         'lable_id',
-        'lable',
-              
+        'lable',           
     ];
 }
 

@@ -156,12 +156,6 @@ public function forgotPassword(Request $request)
         ]);
 
         $email = $request->email;
-
-        //validate email
-        //$validator = Validator::make($Email, [
-          //  'Email' => 'required|Email'
-        //]);
-
         $user = User::where('email', $email)->first();
         if (!$user) {
             Log::channel('custom')->error("Email does not exists");
@@ -169,9 +163,7 @@ public function forgotPassword(Request $request)
             
         } 
         else {
-            //$name = $create->UserName;
 
-            //$token = Auth::fromcreate($create);
             $token = Str::random(10);
             $reset = new PasswordReset();
 
@@ -179,10 +171,7 @@ public function forgotPassword(Request $request)
                 'email' => $request->email,
                 'token' => $token
             ]);
-    
-            //$reset->email = $request->input('email');
-            //$reset->token = $request->input('token');
-    
+
             Mail::to($email)->send(new SendMail($token, $email));
             return "mail sent";
             
@@ -200,12 +189,6 @@ public function forgotPassword(Request $request)
             'token' => 'required'
         ]);
 
-       // $validator = Validator::make($request->all(), [
-         //   'new_password' => 'required|string|min:6|max:50',
-           // 'password_confirmation' => 'required|same:new_password',
-        //]);
-
-
         $passwordReset = PasswordReset::where('token', $request->token)->first();
         if(!$passwordReset){
             Log::channel('custom')->error("You have entered invalid token");
@@ -220,7 +203,6 @@ public function forgotPassword(Request $request)
 
        
     }
-    //**************************************************************** */
 
 
 }
