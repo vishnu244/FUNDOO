@@ -47,8 +47,6 @@ Route::POST('registration',[AuthController::class,'Registerdata']);
 Route::POST('login',[AuthController::class,'login']);
 
 
-
-
 //Route::middleware(['auth:sanctum'])->group(function(){
 
     //User Logout 
