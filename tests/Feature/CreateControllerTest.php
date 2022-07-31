@@ -25,7 +25,6 @@ class CreateControllerTest extends TestCase
     }
 
 
-
     //Testcase case for UnSuccessful registration
     public function test_registration_failed()
     {
