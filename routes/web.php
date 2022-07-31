@@ -17,9 +17,3 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-///------
-
-Route::get('displayLable', function () {
-    return view('welcome');
-});
-///---------
