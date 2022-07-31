@@ -11,8 +11,6 @@ class notes extends Model
     protected $table = 'notes';
     protected $fillable = [
         'Title',
-        'Description',
-        
-        
+        'Description',       
     ];
 }

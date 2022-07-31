@@ -15,13 +15,10 @@ return new class extends Migration
     {
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
-
             $table->string('title')->unique();
             $table->text('description');
-
             $table->timestamps();
-  
-           
+             
         });
     }
 
