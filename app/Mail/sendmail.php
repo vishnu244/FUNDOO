@@ -34,7 +34,6 @@ class sendmail extends Mailable
      */
     public function build()
     {
-        //return $this->view('view.name');
         return $this -> markdown('reset')->with([
             'token' => $this -> token,
             'email' => $this -> email

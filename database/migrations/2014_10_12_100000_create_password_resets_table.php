@@ -17,9 +17,7 @@ return new class extends Migration
             $table->string('email')->index();
             $table->string('token');
             $table->string('password');
-            $table->timestamps();
-           
-            
+            $table->timestamps();          
         });
     }
 
