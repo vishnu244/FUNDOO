@@ -34,20 +34,23 @@ class LableController extends Controller
     // -----------API Function to display Lable-------------------
     public function display_CreateLable()
     {
-        //log::info('Lable Displayed successfully');
-
         $lable = lable::all();
         return response()->json(['success' => $lable]);
-
-
-
     }
 
     // ------------API Function to display Lable by ID------------
     public function display_CreateLable_ID($id)
     {
         $lable = lable::find($id);
-        return response()->json(['success' => $lable]);
+        if($lable)
+        {
+            return response()->json(['success' => $lable]);
+        }
+        else
+        {
+            Log::channel('custom')->info("No Lable Found with that ID");
+            return response()->json(['Message' => "No Lable Found with that ID"]);
+        }
     }
 
 
@@ -73,8 +76,7 @@ class LableController extends Controller
         }
         else
         {
-            Log::channel('custom')->info("Lable Displayed successfully");
-
+            Log::channel('custom')->info("No Lable Found with that ID");
             return response()->json(['message'=>'No Lable Found with that ID'],404);
         }
       
@@ -93,6 +95,7 @@ class LableController extends Controller
         }
         else
         {
+            Log::channel('custom')->info("No Lable Found with that ID");
             return response()->json(['message'=>'No Lable Found with that ID'],404);
         }
     }
@@ -102,7 +105,6 @@ class LableController extends Controller
     public function JoinTables()
     {
         $join = DB::table('notes')->join('lables', 'notes.id','=','lables.lable_id')->select('notes.*','lables.lable')->get();
-        
         return $join;
     }
 }

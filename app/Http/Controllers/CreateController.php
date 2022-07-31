@@ -16,15 +16,13 @@ use Illuminate\Support\Facades\Log;
 
 
 use Illuminate\Support\Str;
-//use App\Models\PasswordReset as ModelsPasswordReset;
 use App\Models\PasswordReset;
-
 use App\Notifications\PasswordResetRequest;
 
 
 class CreateController extends Controller
 {
-    //Function to Create Data
+    //API Function to Create Data
     public function store(Request $request)
     {
         //validating the data to make it not to be null
@@ -65,6 +63,7 @@ class CreateController extends Controller
         }
 
     }
+
     //Function to Retreive Data 
     public function display()
     {
@@ -114,10 +113,8 @@ class CreateController extends Controller
         $create = create::find($id);
         if($create)
         {
-
             $create ->delete();
             return response()->json(['message'=>'Data Deleted Successfully'],200);
-
         }
         else
         {
@@ -125,11 +122,11 @@ class CreateController extends Controller
             return response()->json(['message'=>'No Data Found with that ID'],404);
         }
     }
+
 //****************************************************************** */
 
 
 //changing password in postman
-
 
     public function changePassword(Request $request){
         $request->validate([

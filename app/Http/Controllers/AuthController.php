@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-
 use App\Models\User;
 
 class AuthController extends Controller
@@ -49,7 +48,7 @@ class AuthController extends Controller
 
         if(!$user || !Hash::check($data['password'], $user->password))
         {
-            Log::channel('custom')->error("Invalid Credentials to Logins");
+            Log::channel('custom')->error("Invalid Credentials to Login");
             return response(['message' => 'Invalid Credentials'], 401);
         }
         else
