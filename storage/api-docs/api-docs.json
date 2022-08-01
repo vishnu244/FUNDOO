@@ -234,6 +234,127 @@
                 }
             }
         },
+        "/api/reset": {
+            "post": {
+                "summary": "Change Password",
+                "description": "Changing Password in Postman",
+                "operationId": "7d76e14a4e9c0dc45f9ec125f764e77e",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password",
+                                    "newPassword"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "password": {
+                                        "type": "password"
+                                    },
+                                    "newPassword": {
+                                        "type": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "password updated successfully"
+                    },
+                    "401": {
+                        "description": "Check your old password"
+                    }
+                }
+            }
+        },
+        "/api/forgotPassword": {
+            "post": {
+                "summary": "forgotPassword ",
+                "description": "Resetting Password using forgotPassword function",
+                "operationId": "f29a6e3672a599936c2868e3b9ab6efb",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "email"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Token Sent to Mail to Reset Password"
+                    },
+                    "404": {
+                        "description": "Email does not exists"
+                    }
+                }
+            }
+        },
+        "/api/resetPassword": {
+            "post": {
+                "summary": "Resetting Password",
+                "description": "Resetting Password through Token",
+                "operationId": "03c10ea0cdb21188ce80698a7dec61a0",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password",
+                                    "token"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "password"
+                                    },
+                                    "token": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "password Reset successfull"
+                    },
+                    "401": {
+                        "description": "You have entered invalid token"
+                    }
+                }
+            }
+        },
         "/api/lable": {
             "post": {
                 "summary": "Creating lable",
