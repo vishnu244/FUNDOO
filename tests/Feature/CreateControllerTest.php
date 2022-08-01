@@ -25,7 +25,6 @@ class CreateControllerTest extends TestCase
     }
 
 
-
     //Testcase case for UnSuccessful registration
     public function test_registration_failed()
     {
@@ -208,6 +207,53 @@ class CreateControllerTest extends TestCase
             
         ]);
         $response->assertStatus(404)->assertJson(['message' => 'No Data Found with that ID']);
+    }
+
+
+    public function test_Change_Password()
+    {
+        $response = $this->withHeaders([
+            'Content-Type' => 'Application/json',
+        ])
+        ->json('POST', '/api/reset', 
+        [
+            'email' => 'ABC@gmail.com',
+            'password' =>'vishnu123',
+            'newPassword' => 'vishnu1234',
+            
+        ]);
+        $response->assertStatus(200)->assertJson(['message' => 'password updated successfully']);
+    }
+
+
+    public function test_Forgot_Password()
+    {
+        $response = $this->withHeaders([
+            'Content-Type' => 'Application/json',
+        ])
+        ->json('POST', '/api/forgotPassword', 
+        [
+            'email' => 'mightyvishnumec244@gmail.com',
+            
+            
+        ]);
+        $response->assertStatus(200);
+    }
+
+
+    public function test_Reset_Password()
+    {
+        $response = $this->withHeaders([
+            'Content-Type' => 'Application/json',
+        ])
+        ->json('POST', '/api/forgotPassword', 
+        [
+            'email' => 'mightyvishnumec244@gmail.com',
+            'password' => 'vishnu123',
+            'token' => 'oNzwENnVc7'
+                        
+        ]);
+        $response->assertStatus(200);
     }
 }
 
