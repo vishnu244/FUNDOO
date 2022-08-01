@@ -1,0 +1,478 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Your super  ApplicationAPI",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/registration": {
+            "post": {
+                "summary": "User Registration",
+                "description": "Registering through Name and Email",
+                "operationId": "96c1798f45039ca0c43bba5eb9b99401",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data Registered succesfully"
+                    },
+                    "401": {
+                        "description": "The email has already been taken"
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "summary": "login",
+                "description": "login",
+                "operationId": "a3b306d14572d1f4bd6c064b3233e7b8",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    },
+                    "401": {
+                        "description": "Invalid credentials"
+                    }
+                }
+            }
+        },
+        "/api/create": {
+            "post": {
+                "summary": "Creating data",
+                "description": "Creating Data",
+                "operationId": "cfd81d368280b90f595f26c6bf18c19c",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "UserName",
+                                    "Email",
+                                    "Password",
+                                    "MobileNumber",
+                                    "Address"
+                                ],
+                                "properties": {
+                                    "UserName": {
+                                        "type": "string"
+                                    },
+                                    "Email": {
+                                        "type": "email"
+                                    },
+                                    "Password": {
+                                        "type": "password"
+                                    },
+                                    "MobileNumber": {
+                                        "type": "integer"
+                                    },
+                                    "Address": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Data Added Successfully"
+                    }
+                }
+            }
+        },
+        "/api/displaydata_by_ID/{id}": {
+            "get": {
+                "summary": "displaying data",
+                "description": "Display Data Based on ID",
+                "operationId": "704ae0c35c853eefea7b0c78b1cd2d88",
+                "requestBody": {},
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    },
+                    "401": {
+                        "description": "No data Found with That ID"
+                    }
+                }
+            }
+        },
+        "/api/displaydata": {
+            "get": {
+                "summary": "display data",
+                "description": "display users data",
+                "operationId": "28fac41e820e2f75d9e52114d0a89de2",
+                "requestBody": {},
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    },
+                    "401": {
+                        "description": "Invalid credentials"
+                    }
+                }
+            }
+        },
+        "/api/updatedata_by_ID/{id}": {
+            "post": {
+                "summary": "Updating data",
+                "description": "Update Data by ID",
+                "operationId": "dcb089eeb18dacac5328a299e934ad9c",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "UserName",
+                                    "Email",
+                                    "Password",
+                                    "MobileNumber",
+                                    "Address"
+                                ],
+                                "properties": {
+                                    "UserName": {
+                                        "type": "string"
+                                    },
+                                    "Email": {
+                                        "type": "email"
+                                    },
+                                    "Password": {
+                                        "type": "password"
+                                    },
+                                    "MobileNumber": {
+                                        "type": "integer"
+                                    },
+                                    "Address": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Data Updated Successfully"
+                    },
+                    "401": {
+                        "description": "No Data Found with that ID"
+                    }
+                }
+            }
+        },
+        "/api/deletedata_by_ID/{id}": {
+            "delete": {
+                "summary": "Delete data",
+                "description": "delete users data by ID",
+                "operationId": "0ce8f190432a52ac9b4ddf76f726a4ab",
+                "requestBody": {},
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    },
+                    "401": {
+                        "description": "No Data Found with that ID"
+                    }
+                }
+            }
+        },
+        "/api/lable": {
+            "post": {
+                "summary": "Creating lable",
+                "description": "Creating lable",
+                "operationId": "e9cfb1b40244a9995f5ebc5e7850c0b0",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "lable_id",
+                                    "lable"
+                                ],
+                                "properties": {
+                                    "lable_id": {
+                                        "type": "integer"
+                                    },
+                                    "lable": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Lable Added Successfully"
+                    }
+                }
+            }
+        },
+        "/api/displayLable": {
+            "get": {
+                "summary": "display Lable",
+                "description": "display Lable data",
+                "operationId": "5bd9d863927d636429d2b7e8448b2557",
+                "requestBody": {},
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    }
+                }
+            }
+        },
+        "/api/displayLable/{id}": {
+            "get": {
+                "summary": "displaying Lables",
+                "description": "Display Lable Based on ID",
+                "operationId": "66ea3095eea85d536d278ca7c81b8f85",
+                "requestBody": {},
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    },
+                    "401": {
+                        "description": "No Lable Found with That ID to Display"
+                    }
+                }
+            }
+        },
+        "/api/updateLable/{id}": {
+            "post": {
+                "summary": "Updating lable",
+                "description": "Update lable based on ID",
+                "operationId": "07b46e7fd7331a1e3ee9b7f599c23b92",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "lable_id",
+                                    "lable"
+                                ],
+                                "properties": {
+                                    "lable_id": {
+                                        "type": "integer"
+                                    },
+                                    "lable": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Lable Updated Successfully"
+                    },
+                    "401": {
+                        "description": "No Lable Found with that ID to Update"
+                    }
+                }
+            }
+        },
+        "/api/deleteLable/{id}": {
+            "delete": {
+                "summary": "Delete data",
+                "description": "delete users data by ID",
+                "operationId": "0995fb3d4e038c1b7067891afb7874cf",
+                "requestBody": {},
+                "responses": {
+                    "201": {
+                        "description": "Lable Deleted Successfully"
+                    },
+                    "401": {
+                        "description": "No Lable Found with that ID to Delete"
+                    }
+                }
+            }
+        },
+        "/api/Notes": {
+            "post": {
+                "summary": "Creating Notes",
+                "description": "Creating Notes",
+                "operationId": "bd65b7b835241840cc4a11dcdcadb1b7",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "Title",
+                                    "Description"
+                                ],
+                                "properties": {
+                                    "Title": {
+                                        "type": "string"
+                                    },
+                                    "Description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Notes Added Successfully"
+                    }
+                }
+            }
+        },
+        "/api/displayNotes": {
+            "get": {
+                "summary": "display Notes",
+                "description": "display Notes data",
+                "operationId": "5e818b0f83e49efc8efb934fa3efe0a8",
+                "requestBody": {},
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    }
+                }
+            }
+        },
+        "/api/displayNotes/{id}": {
+            "get": {
+                "summary": "displaying Notes",
+                "description": "Display Notes Based on ID",
+                "operationId": "12885d101a2f84d537f2fddb7fd32f78",
+                "requestBody": {},
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    },
+                    "401": {
+                        "description": "No Notes Found with That ID to Display"
+                    }
+                }
+            }
+        },
+        "/api/updateNotes/{id}": {
+            "post": {
+                "summary": "Updating Notes",
+                "description": "Update Notes based on ID",
+                "operationId": "af18b2c50db429f53de5e0c27b38e04f",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "Title",
+                                    "Description"
+                                ],
+                                "properties": {
+                                    "Title": {
+                                        "type": "string"
+                                    },
+                                    "Description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Notes Updated Successfully"
+                    },
+                    "401": {
+                        "description": "No Notes Found with that ID to Update"
+                    }
+                }
+            }
+        },
+        "/api/deleteNotes/{id}": {
+            "delete": {
+                "summary": "Delete Notes",
+                "description": "delete users notes by ID",
+                "operationId": "b9cfb901403567529c287a81fa95c9e6",
+                "requestBody": {},
+                "responses": {
+                    "201": {
+                        "description": "Notes Deleted Successfully"
+                    },
+                    "401": {
+                        "description": "No Notes Found with that ID to Delete"
+                    }
+                }
+            }
+        }
+    }
+}

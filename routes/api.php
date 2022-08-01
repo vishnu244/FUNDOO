@@ -8,6 +8,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NotesController;
 use App\Http\Controllers\LableController;
 use App\Http\Controllers\CacheController;
+//use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 
 /*

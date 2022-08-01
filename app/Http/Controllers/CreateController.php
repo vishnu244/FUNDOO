@@ -18,10 +18,39 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use App\Models\PasswordReset;
 use App\Notifications\PasswordResetRequest;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 
 class CreateController extends Controller
 {
+
+     /**
+     * @OA\POST(
+     *   path="/api/create",
+     *   summary="Creating data",
+     *   description="Creating Data",
+     *   @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"UserName","Email", "Password", "MobileNumber", "Address"},
+     *               @OA\Property(property="UserName", type="string"),
+     *               @OA\Property(property="Email", type="email"),
+     *               @OA\Property(property="Password", type="password"),
+     *               @OA\Property(property="MobileNumber", type="int"),
+     *               @OA\Property(property="Address", type="string"),
+     *            ),
+     *        ),
+     *    ),
+     *   @OA\Response(response=200, description="Data Added Successfully"),
+     *   
+     * )
+     * 
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     //API Function to Create Data
     public function store(Request $request)
     {
@@ -49,6 +78,21 @@ class CreateController extends Controller
 
     }
 
+     /**
+     * @OA\GET(
+     *   path="/api/displaydata_by_ID/{id}",
+     *   summary="displaying data",
+     *   description="Display Data Based on ID",
+     *   @OA\RequestBody(
+     *    ),
+     *   @OA\Response(response=201, description="success"),
+     *   @OA\Response(response=401, description="No data Found with That ID"),
+     * )
+     * 
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    
     //Function to Retreive Data Based on ID 
     public function display_by_id($id)
     {
@@ -64,6 +108,22 @@ class CreateController extends Controller
 
     }
 
+     /**
+     * @OA\GET(
+     *   path="/api/displaydata",
+     *   summary="display data",
+     *   description="display users data",
+     *   @OA\RequestBody(
+     *    ),
+     *   @OA\Response(response=201, description="success"),
+     *   @OA\Response(response=401, description="Invalid credentials"),
+     * )
+     * 
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    
+
     //Function to Retreive Data 
     public function display()
     {
@@ -71,6 +131,36 @@ class CreateController extends Controller
         return response()->json(['success' => $create]);
     }
 
+
+
+     /**
+     * @OA\POST(
+     *   path="/api/updatedata_by_ID/{id}",
+     *   summary="Updating data",
+     *   description="Update Data by ID",
+     *   @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"UserName","Email", "Password", "MobileNumber", "Address"},
+     *               @OA\Property(property="UserName", type="string"),
+     *               @OA\Property(property="Email", type="email"),
+     *               @OA\Property(property="Password", type="password"),
+     *               @OA\Property(property="MobileNumber", type="int"),
+     *               @OA\Property(property="Address", type="string"),
+     *            ),
+     *        ),
+     *    ),
+     *   @OA\Response(response=200, description="Data Updated Successfully"),
+     *   @OA\Response(response=401, description="No Data Found with that ID"),
+     *   
+     * )
+     * 
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
 
     //Function to Update Data based on ID
     public function update_by_id(Request $request, $id)
@@ -105,6 +195,21 @@ class CreateController extends Controller
         }
     }
 
+
+     /**
+     * @OA\DELETE(
+     *   path="/api/deletedata_by_ID/{id}",
+     *   summary="Delete data",
+     *   description="delete users data by ID",
+     *   @OA\RequestBody(
+     *    ),
+     *   @OA\Response(response=201, description="success"),
+     *   @OA\Response(response=401, description="No Data Found with that ID"),
+     * )
+     * 
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
 
     //Function to Delete Data based on ID
     public function delete_by_id(Request $request, $id)
@@ -173,6 +278,7 @@ public function forgotPassword(Request $request)
             ]);
 
             Mail::to($email)->send(new SendMail($token, $email));
+            
             return "mail sent";
             
         }

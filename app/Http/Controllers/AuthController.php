@@ -9,6 +9,34 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+    /**
+     * @OA\POST(
+     *   path="/api/registration",
+     *   summary="User Registration",
+     *   description="Registering through Name and Email",
+     *   @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"name","email", "password"},
+     *               @OA\Property(property="name", type="string"),
+     *               @OA\Property(property="email", type="string"),
+     *               @OA\Property(property="password", type="string"),
+     *            ),
+     *        ),
+     *    ),
+     *   @OA\Response(response=201, description="Data Registered succesfully"),
+     *   @OA\Response(response=401, description="The email has already been taken"),
+     * )
+     * 
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+
+
     //API for Registration
     public function Registerdata(Request $request)
     { 
@@ -33,6 +61,32 @@ class AuthController extends Controller
         return response($response,201);
 
     }
+
+    /**
+     * @OA\Post(
+     *   path="/api/login",
+     *   summary="login",
+     *   description="login",
+     *   @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"email","password"},
+     *               @OA\Property(property="email", type="string"),
+     *               @OA\Property(property="password", type="string"),
+     *   
+     *            ),
+     *        ),
+     *    ),
+     *   @OA\Response(response=201, description="success"),
+     *   @OA\Response(response=401, description="Invalid credentials"),
+     * )
+     * 
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
 
 
      //API for Login
