@@ -475,6 +475,19 @@
                 }
             }
         },
+        "/api/jointables": {
+            "post": {
+                "summary": "Join Tables",
+                "description": "Join Tables by their ID",
+                "operationId": "b1d0079522077334a2c8109b736b7018",
+                "requestBody": {},
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    }
+                }
+            }
+        },
         "/api/Notes": {
             "post": {
                 "summary": "Creating Notes",

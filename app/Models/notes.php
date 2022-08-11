@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\support\Facades\DB;
 
 class notes extends Model
 {
@@ -18,6 +19,8 @@ class notes extends Model
 
 
     public function noteId($id) {
-        return notes::where('id', $id)->first();
+        return Notes::where('id', $id)->first();
     }
+
+    
 }

@@ -75,6 +75,7 @@ class notesController extends Controller
     {
         $notes = notes::all();
         return response()->json(['success' => $notes]);
+        Log::channel('custom')->info("Notes Displayed successfully");
 
     }
 
@@ -101,6 +102,7 @@ class notesController extends Controller
         if($notes)
         {
             return response()->json(['success' => $notes]);
+            Log::channel('custom')->info("Notes Displayed successfully based on ID");
         }
         else
         {
@@ -156,6 +158,7 @@ class notesController extends Controller
             
             $notes ->update();
             return response()->json(['message'=>'Notes Updated Successfully'],200);
+            Log::channel('custom')->info("Notes Updated Successfully");
         }
         else
         {
@@ -190,6 +193,7 @@ class notesController extends Controller
         {
             $notes ->delete();
             return response()->json(['message'=>'Data Deleted Successfully'],200);
+            Log::channel('custom')->info("Data Deleted Successfully");
         }
         else
         {
@@ -410,6 +414,7 @@ class notesController extends Controller
             return response()->json(['message' => 'Notes UnArchived successfully'], 201);                          
         }
     }
+
 
 
 }
