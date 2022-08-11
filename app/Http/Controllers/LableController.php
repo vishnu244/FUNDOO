@@ -203,10 +203,27 @@ class LableController extends Controller
     }
 
 
-        // -----------API Function to JoinTable  by ID--------------
+    // -----------API Function to JoinTable  by ID--------------
+     /**
+     * @OA\POST(
+     *   path="/api/jointables",
+     *   summary="Join Tables",
+     *   description="Join Tables by their ID",
+     *   @OA\RequestBody(
+     *    ),
+     *   @OA\Response(response=201, description="success"),
+     * )
+     * 
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function JoinTables()
     {
         $join = DB::table('notes')->join('lables', 'notes.id','=','lables.lable_id')->select('notes.*','lables.lable')->get();
-        return $join;
+        return response()->json(['success' => $join]);
+        Log::channel('custom')->info("Lable's added to The Notes using join's");
+
     }
+      
+
 }

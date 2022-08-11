@@ -27,7 +27,7 @@ class CreateController extends Controller
      /**
      * @OA\POST(
      *   path="/api/create",
-     *   summary="Creating data",
+     *   summary="Creating data for Practice",
      *   description="Creating Data",
      *   @OA\RequestBody(
      *         @OA\JsonContent(),
@@ -81,7 +81,7 @@ class CreateController extends Controller
      /**
      * @OA\GET(
      *   path="/api/displaydata_by_ID/{id}",
-     *   summary="displaying data",
+     *   summary="displaying data for Practice",
      *   description="Display Data Based on ID",
      *   @OA\RequestBody(
      *    ),
@@ -111,7 +111,7 @@ class CreateController extends Controller
      /**
      * @OA\GET(
      *   path="/api/displaydata",
-     *   summary="display data",
+     *   summary="display data for Practice",
      *   description="display users data",
      *   @OA\RequestBody(
      *    ),
@@ -136,7 +136,7 @@ class CreateController extends Controller
      /**
      * @OA\POST(
      *   path="/api/updatedata_by_ID/{id}",
-     *   summary="Updating data",
+     *   summary="Updating data for Practice",
      *   description="Update Data by ID",
      *   @OA\RequestBody(
      *         @OA\JsonContent(),
@@ -199,7 +199,7 @@ class CreateController extends Controller
      /**
      * @OA\DELETE(
      *   path="/api/deletedata_by_ID/{id}",
-     *   summary="Delete data",
+     *   summary="Delete data for Practice",
      *   description="delete users data by ID",
      *   @OA\RequestBody(
      *    ),

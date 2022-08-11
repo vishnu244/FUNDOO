@@ -24,7 +24,6 @@ use App\Http\Controllers\CacheController;
 
 //User Registration
 
-Route::POST('jointables',[LableController::class,'JoinTables']);
 
 
 Route::POST('Notes',[NotesController::class,'CreateNotes']);
@@ -35,6 +34,12 @@ Route::post('updateNotes/{id}',[NotesController::class,'update_createdNotes_ID']
 Route::delete('deleteNotes/{id}',[NotesController::class,'delete_createdNotes_ID']);
 
 
+Route::post('pinNotesById',[NotesController::class,'pinNotesById']);
+Route::post('UnpinNotesById',[NotesController::class,'UnpinNotesById']);
+Route::post('ArchieveNotesById',[NotesController::class,'ArchieveNotesById']);
+Route::post('UnArchiveNotesById',[NotesController::class,'UnArchiveNotesById']);
+
+
 Route::POST('lable',[LableController::class,'CreateLable']);
 Route::get('displayLable',[LableController::class,'display_CreateLable']);
 Route::get('displayLable/{id}',[LableController::class,'display_CreateLable_ID']);
@@ -42,13 +47,15 @@ Route::put('updateLable/{id}',[LableController::class,'update_CreateLable_ID']);
 Route::post('updateLable/{id}',[LableController::class,'update_CreateLable_ID']);
 Route::delete('deleteLable/{id}',[LableController::class,'delete_CreateLable_ID']);
 
+Route::POST('jointables',[LableController::class,'JoinTables']);
+
 
 
 Route::POST('registration',[AuthController::class,'Registerdata']);
 Route::POST('login',[AuthController::class,'login']);
 
 
-//Route::middleware(['auth:sanctum'])->group(function(){
+Route::middleware(['auth:sanctum'])->group(function(){
 
     //User Logout 
     Route::POST('logout',[AuthController::class,'logout']);
@@ -69,7 +76,7 @@ Route::POST('login',[AuthController::class,'login']);
 
     //Delete data by Delete method
     Route::Delete('deletedata_by_ID/{id}',[CreateController::class,'delete_by_id']);
-//});
+});
 
 Route::post('reset',[CreateController::class,'changePassword']);
 Route::post('forgotPassword',[CreateController::class,'forgotPassword']);
