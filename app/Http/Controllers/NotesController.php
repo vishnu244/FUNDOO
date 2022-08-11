@@ -221,7 +221,7 @@ class notesController extends Controller
      *            ),
      *        ),
      *    ),
-     *   @OA\Response(response=201, description="Notes pinned Successfully"),
+     *   @OA\Response(response=200, description="Notes pinned Successfully"),
      *   @OA\Response(response=404, description="No Notes Found with that ID"),
      *   
      * )
@@ -252,7 +252,7 @@ class notesController extends Controller
             $notes->save();
 
             Log::channel('custom')->info('Notes pinned successfully');
-            return response()->json(['message' => 'Notes pinned Successfully'], 201);                          
+            return response()->json(['message' => 'Notes pinned Successfully'], 200);                          
         }
     }
 
@@ -275,7 +275,7 @@ class notesController extends Controller
      *            ),
      *        ),
      *    ),
-     *   @OA\Response(response=201, description="Notes Unpinned Successfully"),
+     *   @OA\Response(response=200, description="Notes Unpinned Successfully"),
      *   @OA\Response(response=404, description="No Notes Found with that ID"),
      *   
      * )
@@ -303,7 +303,7 @@ class notesController extends Controller
             $notes->save();
 
             Log::channel('custom')->info('Notes Unpinned successfully');
-            return response()->json(['message' => 'Notes Unpinned Successfully'], 201);                          
+            return response()->json(['message' => 'Notes Unpinned Successfully'], 200);                          
         }
     }
 
@@ -328,7 +328,7 @@ class notesController extends Controller
      *            ),
      *        ),
      *    ),
-     *   @OA\Response(response=201, description="Notes Archived Successfully"),
+     *   @OA\Response(response=200, description="Notes Archived Successfully"),
      *   @OA\Response(response=404, description="No Notes Found with that ID"),
      *   
      * )
@@ -360,7 +360,7 @@ class notesController extends Controller
             $notes->save();
 
             Log::channel('custom')->info('Notes Archived successfully');
-            return response()->json(['message' => 'Notes Archived Successfully'], 201);                          
+            return response()->json(['message' => 'Notes Archived Successfully'], 200);                          
         }
     }
 
@@ -383,7 +383,7 @@ class notesController extends Controller
      *            ),
      *        ),
      *    ),
-     *   @OA\Response(response=201, description="Notes UnArchived Successfully"),
+     *   @OA\Response(response=200, description="Notes UnArchived Successfully"),
      *   @OA\Response(response=404, description="No Notes Found with that ID"),
      *   
      * )
@@ -411,7 +411,7 @@ class notesController extends Controller
             $notes->save();
 
             Log::channel('custom')->info('Notes UnArchived successfully');
-            return response()->json(['message' => 'Notes UnArchived successfully'], 201);                          
+            return response()->json(['message' => 'Notes UnArchived successfully'], 200);                          
         }
     }
 
