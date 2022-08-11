@@ -89,7 +89,7 @@
         },
         "/api/create": {
             "post": {
-                "summary": "Creating data",
+                "summary": "Creating data for Practice",
                 "description": "Creating Data",
                 "operationId": "cfd81d368280b90f595f26c6bf18c19c",
                 "requestBody": {
@@ -137,7 +137,7 @@
         },
         "/api/displaydata_by_ID/{id}": {
             "get": {
-                "summary": "displaying data",
+                "summary": "displaying data for Practice",
                 "description": "Display Data Based on ID",
                 "operationId": "704ae0c35c853eefea7b0c78b1cd2d88",
                 "requestBody": {},
@@ -153,7 +153,7 @@
         },
         "/api/displaydata": {
             "get": {
-                "summary": "display data",
+                "summary": "display data for Practice",
                 "description": "display users data",
                 "operationId": "28fac41e820e2f75d9e52114d0a89de2",
                 "requestBody": {},
@@ -169,7 +169,7 @@
         },
         "/api/updatedata_by_ID/{id}": {
             "post": {
-                "summary": "Updating data",
+                "summary": "Updating data for Practice",
                 "description": "Update Data by ID",
                 "operationId": "dcb089eeb18dacac5328a299e934ad9c",
                 "requestBody": {
@@ -220,7 +220,7 @@
         },
         "/api/deletedata_by_ID/{id}": {
             "delete": {
-                "summary": "Delete data",
+                "summary": "Delete data for Practice",
                 "description": "delete users data by ID",
                 "operationId": "0ce8f190432a52ac9b4ddf76f726a4ab",
                 "requestBody": {},
@@ -591,6 +591,146 @@
                     },
                     "401": {
                         "description": "No Notes Found with that ID to Delete"
+                    }
+                }
+            }
+        },
+        "/api/pinNotesById": {
+            "post": {
+                "summary": "Pin Notes by ID",
+                "description": "Pin Notes by ID",
+                "operationId": "04a75d6fe68ac1fba67bec4c44dd6415",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Notes pinned Successfully"
+                    },
+                    "404": {
+                        "description": "No Notes Found with that ID"
+                    }
+                }
+            }
+        },
+        "/api/UnpinNotesById": {
+            "post": {
+                "summary": "UnPin Notes by ID",
+                "description": "UnPin Notes by ID",
+                "operationId": "58843fd6594d155813f97db4da71f673",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Notes Unpinned Successfully"
+                    },
+                    "404": {
+                        "description": "No Notes Found with that ID"
+                    }
+                }
+            }
+        },
+        "/api/ArchieveNotesById": {
+            "post": {
+                "summary": "Archive Notes by ID",
+                "description": "Archive Notes by ID",
+                "operationId": "e6187d3309c10c68980238ec24b7fd84",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Notes Archived Successfully"
+                    },
+                    "404": {
+                        "description": "No Notes Found with that ID"
+                    }
+                }
+            }
+        },
+        "/api/UnArchiveNotesById": {
+            "post": {
+                "summary": "UnArchive Notes by ID",
+                "description": "UnArchive Notes by ID",
+                "operationId": "8d4b1b238acd0715a825bb11a27db9bf",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Notes UnArchived Successfully"
+                    },
+                    "404": {
+                        "description": "No Notes Found with that ID"
                     }
                 }
             }

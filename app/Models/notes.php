@@ -11,6 +11,13 @@ class notes extends Model
     protected $table = 'notes';
     protected $fillable = [
         'Title',
-        'Description',       
+        'Description',
+        'pin',   
+        'archive',   
     ];
+
+
+    public function noteId($id) {
+        return notes::where('id', $id)->first();
+    }
 }
