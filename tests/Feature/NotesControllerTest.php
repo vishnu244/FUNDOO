@@ -66,6 +66,7 @@ class NotesControllerTest extends TestCase
         $response->assertStatus(200)->assertJson(['message' => 'Data Deleted Successfully']);
     }
 
+
     //Testcase case to PIN createdNotes
     public function test_pin_Notes()
     {
@@ -78,6 +79,7 @@ class NotesControllerTest extends TestCase
             ]);
         $response->assertStatus(200)->assertJson(['message' => 'Notes pinned Successfully']);
     }
+    
 
     //Testcase case to UnPIN createdNotes
     public function test_UnPin_Notes()
