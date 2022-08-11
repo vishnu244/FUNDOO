@@ -36,6 +36,7 @@ class LableControllerTest extends TestCase
             ]);
         $response->assertStatus(200)->assertJson(['message' => 'Lable Updated successfully']);
     }
+    
 
     //Testcase case for Update invalid createLable
     public function test_Update_CreateLable_invalid()
