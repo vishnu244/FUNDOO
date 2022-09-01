@@ -634,7 +634,7 @@
                     }
                 },
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "Notes pinned Successfully"
                     },
                     "404": {
@@ -669,7 +669,7 @@
                     }
                 },
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "Notes Unpinned Successfully"
                     },
                     "404": {
@@ -704,7 +704,7 @@
                     }
                 },
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "Notes Archived Successfully"
                     },
                     "404": {
@@ -739,11 +739,85 @@
                     }
                 },
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "Notes UnArchived Successfully"
                     },
                     "404": {
                         "description": "No Notes Found with that ID"
+                    }
+                }
+            }
+        },
+        "/api/colorNoteById": {
+            "post": {
+                "summary": "Color Notes by ID",
+                "description": "Color Notes by ID with in the given Array",
+                "operationId": "4e0e65ed9454ca278277d2aa6ff3749a",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "color"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "color": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Notes colored Successfully"
+                    },
+                    "404": {
+                        "description": "No Notes Found with that ID"
+                    }
+                }
+            }
+        },
+        "/api/TrashNotesById": {
+            "post": {
+                "summary": "Trash Notes by ID",
+                "description": "Trash Notes by ID",
+                "operationId": "700b322f2978ea6dd88f817bc8eaf76e",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Notes Moved to Trash Folder "
+                    },
+                    "404": {
+                        "description": "No Notes Found with that ID to Trash"
                     }
                 }
             }
