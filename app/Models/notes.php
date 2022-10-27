@@ -15,6 +15,8 @@ class notes extends Model
         'Description',
         'pin',   
         'archive',   
+        'color',
+        'Trash',
     ];
 
 

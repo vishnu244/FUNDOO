@@ -38,6 +38,10 @@ Route::post('pinNotesById',[NotesController::class,'pinNotesById']);
 Route::post('UnpinNotesById',[NotesController::class,'UnpinNotesById']);
 Route::post('ArchieveNotesById',[NotesController::class,'ArchieveNotesById']);
 Route::post('UnArchiveNotesById',[NotesController::class,'UnArchiveNotesById']);
+Route::post('colorNoteById',[NotesController::class,'colorNoteById']);
+Route::post('TrashNotesById',[NotesController::class,'TrashNotesById']);
+
+
 
 
 Route::POST('lable',[LableController::class,'CreateLable']);

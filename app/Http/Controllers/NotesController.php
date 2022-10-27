@@ -417,4 +417,143 @@ class notesController extends Controller
 
 
 
+     //------------------Function to Color Notes----------------------------
+    /**
+     * @OA\POST(
+     *   path="/api/colorNoteById",
+     *   summary="Color Notes by ID",
+     *   description="Color Notes by ID with in the given Array",
+     *   @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"id", "color"},
+     *               @OA\Property(property="id", type="integer"),
+     *               @OA\Property(property="color", type="string"),
+     *               
+     *            ),
+     *        ),
+     *    ),
+     *   @OA\Response(response=201, description="Notes colored Successfully"),
+     *   @OA\Response(response=404, description="No Notes Found with that ID"),
+     *   
+     * )
+     * 
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    function colorNoteById (Request $request)
+    {
+        $request->validate( [
+            'id' => 'required | integer',
+            'color' => 'required|string'
+        ]);
+
+        $notesObject = new Notes();
+        $notes = $notesObject->noteId($request->id);
+        // $notes = $notesObject->color($request->color);
+            if (!$notes) {
+                Log::channel('custom')->info("No Notes Found with that ID");
+                return response()->json(['message'=>'No Notes Found with that ID'],404);
+
+            }
+
+            $colors  =  array(
+                'green' => 'rgb(0,255,0)',
+                'red' => 'rgb(255,0,0)',
+                'blue' => 'rgb(0,0,255)',
+                'yellow' => 'rgb(255,255,0)',
+                'grey' => 'rgb(128,128,128)',
+                'purple' => 'rgb(128,0,128)',
+                'brown' => 'rgb(165,42,42)',
+                'orange' => 'rgb(255,165,0)',
+                'pink' => 'rgb(255,192,203)',
+                'black' => 'rgb(0,0,0)',
+                'silver' => 'rgb(192,192,192)',
+                'teal' => 'rgb(0,128,128)',
+                'white' => 'rgb(255,255,255)',
+            );
+
+            $color_name = strtolower($request->color);
+
+            if (isset($colors[$color_name])) {
+                $notes->color = $colors[$color_name];
+                $notes->save();
+
+                Log::channel('custom')->info('notes colored', ['id' => $request->id]);
+                return response()->json([
+                    'status' => 201,
+                    'message' => 'Note colored Sucessfully'
+                ], 201);
+            } else {
+                return response()->json([
+                    'status' => 400,
+                    'message' => 'Color Not Specified in the List'
+                ], 400);
+            }
+        
+    }
+
+
+    
+    //--------------------Function to Trash Notes----------------------------
+    /**
+     * @OA\POST(
+     *   path="/api/TrashNotesById",
+     *   summary="Trash Notes by ID",
+     *   description="Trash Notes by ID",
+     *   @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"id"},
+     *               @OA\Property(property="id", type="integer"),
+     *               
+     *            ),
+     *        ),
+     *    ),
+     *   @OA\Response(response=200, description="Notes Moved to Trash Folder "),
+     *   @OA\Response(response=404, description="No Notes Found with that ID to Trash"),
+     *   
+     * )
+     * 
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    function TrashNotesById(Request $request)
+    {
+        $request->validate( [
+            'id' => 'required | integer',
+        ]);
+
+        $notesObject = new Notes();
+        $notes = $notesObject->noteId($request->id);
+
+        if (!$notes) {
+            Log::channel('custom')->info("No Notes Found with that ID");
+            return response()->json(['message'=>'No Notes Found with that ID'],404);
+        }
+        if ($notes->trash == 0)
+        {
+            if($notes->trash == 1){
+                $notes->trash =0;
+                $notes -> save();
+            }
+            
+            $notes->trash = 1;
+            $notes->save();
+
+            Log::channel('custom')->info('Notes moved to Trash Folder ');
+            return response()->json(['message' => 'Notes moved to Trash Successfully'], 200);                          
+        }
+    }
+
+
+
 }
